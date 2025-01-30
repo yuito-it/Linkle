@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import SidebarMain from "./sidebar/main";
+import SidebarMain from "@/components/sidebar/main";
 import { SessionProvider } from "next-auth/react";
 
 export default async function Sidebar({ children }: Readonly<{ children: React.ReactNode }>) {
