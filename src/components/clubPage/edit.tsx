@@ -94,7 +94,7 @@ export default function ClubEdit({ id }: { id: string }) {
                                     if (imgURL?.host == "drive.google.com" && imgURL?.pathname.startsWith('/uc')) {
                                         URLres = imgURL.toString();
                                     } else if (imgURL?.host == "drive.google.com") {
-                                        let temp1 = imgURL?.pathname.split('/')[2];
+                                        let temp1 = imgURL?.pathname.split('/')[3];
                                         let temp2 = temp1?.split('?')[0];
                                         URLres = `https://drive.google.com/uc?export=view&id=${temp2}`;
                                     }
