@@ -25,6 +25,13 @@ export const generateMetadata = async ({
     return {
         title: `${data.name} - Linkle`,
         description: `${data.short_description}`,
+        openGraph: {
+            title: `${data.name} - Linkle`,
+            description: `${data.short_description}`,
+            type: 'website',
+            url: `${apiBase}/clubs/${slug[0]}`,
+            images: data.logo ? `${apiBase}/api/clubs/${slug[0]}/logo` : undefined
+        },
     };
 }
 
