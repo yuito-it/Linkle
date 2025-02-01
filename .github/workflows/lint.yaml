@@ -19,6 +19,6 @@ jobs:
           with:
             node-version: "22"
         - name: Install dependencies
-          run: bun install
+          run: npm instal -g bun && bun install
         - name: Lint
           run: bun lint
