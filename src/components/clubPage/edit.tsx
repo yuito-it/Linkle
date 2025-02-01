@@ -1,5 +1,4 @@
 "use client";
-import { getClubById } from "@/libs/searchers/clubs";
 import { Alert, Button, Checkbox, Divider, FormControl, FormControlLabel, FormHelperText, Stack, TextField, ThemeProvider, Typography } from "@mui/material";
 import 'katex/dist/katex.min.css';
 import { redirect } from "next/navigation";
@@ -21,8 +20,8 @@ export default function ClubEdit({ id }: { id: string }) {
                 setLoading(true);
                 setSearchError(null);
                 try {
-                    const result = await getClubById(id);
-                    const res = result?.data[0];
+                    const apiRes = await fetch(`/api/clubs/${id}`);
+                    const res = await apiRes.json();
                     if (!res) window.location.href = "/notfound";
                     if (!(session?.user?.email)) window.location.href = "/forbidden";
                     const isOwn = await isOwner(session?.user?.email as string, res.id);
