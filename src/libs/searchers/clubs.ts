@@ -15,7 +15,7 @@ const searchClubs = async (
     data?: SearchClubsRequest
 ): Promise<SearchClubsResponse> => {
     const session = await auth();
-    const response = await fetch(`${endpoint}/clubs?${data?.query ? `&search=${data.query}` : ""}`);
+    const response = await fetch(`${endpoint}/clubs?${data?.query ? `&search=${data.query}` : ""}&filter1=visible,ge,${session ? 0x1 : 0x2}&order=created_at,desc`);
     const resultRaw = await response.json();
     const result = resultRaw.records as Club[];
 
@@ -37,8 +37,11 @@ const searchClubs = async (
 export default searchClubs;
 
 export const getClubById = async (id: string): Promise<SearchClubsResponse> => {
-    const response = await fetch(`${endpoint}/clubs/?filter1=id,eq,${id}`);
+    const session = await auth();
+    console.log(`${endpoint}/clubs/?filter1=id,eq,${id}&filter1=visible,ge,${session ? 0x1 : 0x2}`);
+    const response = await fetch(`${endpoint}/clubs/?filter1=id,eq,${id}&filter1=visible,ge,${session ? 0x1 : 0x2}`);
     const result = await response.json();
+    console.log(result.records);
     return {
         status: "200",
         data: result.records,
