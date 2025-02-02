@@ -7,6 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
+import GroupsIcon from '@mui/icons-material/Groups';
 
 export default function MenuList() {
     const session = useSession();
@@ -17,13 +18,13 @@ export default function MenuList() {
             href: '/dashboard',
             icon: <DashboardIcon />,
         },
-        // TODO: あとで実装する
-        /*{
+        {
             label: 'クラブ一覧',
             href: '/clubs',
-            icon: <DashboardIcon/>,
+            icon: <GroupsIcon />,
         },
-        {
+        // TODO: あとで実装する
+        /*{
             label: 'イベント一覧',
             href: '/events',
             icon: <DashboardIcon/>,
