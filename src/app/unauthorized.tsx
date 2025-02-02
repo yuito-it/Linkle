@@ -12,7 +12,7 @@ export default async function forbidden() {
             <Typography variant="h1">401</Typography>
             <Typography variant="h5">Unauthorized</Typography>
             <Typography>
-                You're not authorized to access this page.
+                You&#39;re not authorized to access this page.
             </Typography>
             <Link href="/signin">Signin</Link>
         </Stack>
