@@ -1,6 +1,5 @@
 "use client";
 import ClubCard from "@/components/ClubCard";
-import { getMyClub, SearchClubsResponse } from "@/libs/searchers/userClubData";
 import { Alert, Button, CircularProgress, Grid2, Link, Pagination, PaginationItem, Stack, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";

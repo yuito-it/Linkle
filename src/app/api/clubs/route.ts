@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     }
 }
 
-export const GET = async (req: NextRequest) => {
+export const GET = async () => {
     const session = await auth();
     const apiRes = await fetch(`${endpoint}/clubs?order=created_at,desc&filter1=visible,ge,${session ? 0x1 : 0x2}`);
     if (apiRes.ok) {
