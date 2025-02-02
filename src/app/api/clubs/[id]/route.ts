@@ -1,11 +1,10 @@
 import Club from "@/models/Club";
-import User from "@/models/User";
 
 export const dynamic = 'force-dynamic';
 
 const endpoint = process.env.DB_API_ENDPOINT;
 
-export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function GET({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
     const clubRes = await fetch(`${endpoint}/clubs/${id}`);
     const clubData = (await clubRes.json()) as Club;
@@ -15,7 +14,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     return Response.json(clubData);
 }
 
-export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
     const apiRes = await fetch(`${endpoint}/clubs/${id}`, {
         method: "DELETE",
