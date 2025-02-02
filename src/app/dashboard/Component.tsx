@@ -6,12 +6,13 @@ import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Club from "@/models/Club";
 
 export default function Dashboard() {
     const searchParams = useSearchParams();
     const page = searchParams.get("page");
     const { data: session } = useSession();
-    const [searchResult, setSearchResult] = useState<SearchClubsResponse | null>(null);
+    const [clubs, setSearchResult] = useState<Club[] | null>(null);
     const [searchError, setSearchError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -19,7 +20,8 @@ export default function Dashboard() {
         setSearchError(null);
         const fetchData = async () => {
             try {
-                const result = await getMyClub(session?.user?.email as string);
+                const result = (await (await fetch(`/api/user?email=${session?.user?.email}`)).json()).clubs;
+                console.log("res:"+result);
                 setSearchResult(result);
             } catch (error) {
                 setSearchError("検索中にエラーが発生しました。もう一度お試しください。");
@@ -32,7 +34,6 @@ export default function Dashboard() {
             fetchData();
         }
     }, [session]);
-    const clubs = searchResult?.data;
     return (
         <Stack spacing={2} py={10} px={{ xs: 2, lg: 10 }} justifyContent={"center"} alignItems={"center"} width={"100%"}>
             <Typography variant="h3">ダッシュボード</Typography>
