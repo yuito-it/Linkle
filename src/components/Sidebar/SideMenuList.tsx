@@ -8,11 +8,17 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import GroupsIcon from '@mui/icons-material/Groups';
+import HomeIcon from '@mui/icons-material/Home';
 
 export default function MenuList() {
     const session = useSession();
 
     const loginedMenuList = [
+        {
+            label: 'ホーム',
+            href: '/',
+            icon: <HomeIcon />,
+        },
         {
             label: 'ダッシュボード',
             href: '/dashboard',
@@ -42,6 +48,11 @@ export default function MenuList() {
     ];
 
     const noLoginedMenuList = [
+        {
+            label: 'ホーム',
+            href: '/',
+            icon: <HomeIcon />,
+        },
         {
             label: 'クラブ一覧',
             href: '/clubs',
