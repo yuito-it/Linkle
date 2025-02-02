@@ -61,7 +61,7 @@ export default function Footer() {
                         />
                     </Box>
                 </Stack>
-                <Stack bgcolor='primary.light' p={2} direction={{ xs: "column", lg: "row" }} textAlign='center' maxWidth={"100%"}>
+                <Stack bgcolor='primary.light' p={2} direction={{ xs: "column", xl: "row" }} textAlign='center' maxWidth={"100%"} justifyContent={{ xl: "space-between" }}>
                     <Typography variant='body1' color='text.secondary'>
                         (c) 2025 UniProject All Rights Reserved.
                     </Typography>
