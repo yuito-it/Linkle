@@ -45,7 +45,7 @@ export default function Footer() {
                             また当団体は学外の団体の関連団体ですが、学外への情報提供は行っておりません。
                         </Typography>
                     </Box>
-                    <Box p={2} textAlign='left' width={{ xs: "100%", lg: (1 / 3) }} margin={{ xs: 0, lg: 5 }} justifyContent={"center"} justifyItems={"center"}>
+                    <Stack flexDirection={'column'} p={2} width={{ xs: "100%", lg: (1 / 3) }} margin={{ xs: 0, lg: 5 }} alignItems={'center'} spacing={2} justifyContent={"center"} justifyItems={"center"}>
                         <iframe
                             src="https://uniproject.instatus.com/embed-status/3559d5ef/light-lg"
                             width="245"
@@ -59,7 +59,7 @@ export default function Footer() {
                                 width: 245,
                             }}
                         />
-                    </Box>
+                    </Stack>
                 </Stack>
                 <Stack bgcolor='primary.light' p={2} direction={{ xs: "column", xl: "row" }} textAlign='center' maxWidth={"100%"} justifyContent={{ xl: "space-between" }}>
                     <Typography variant='body1' color='text.secondary'>
