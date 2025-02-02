@@ -20,9 +20,3 @@ export const getMyClub = async (email: string): Promise<SearchClubsResponse> => 
         data: result2,
     };
 }
-
-export const isOwner = async (email: string, clubId: number | string): Promise<boolean> => {
-    const response = await fetch(`${endpoint}/user_club/?filter1=user,eq,${email}&filter2=club,eq,${clubId}`);
-    const result = await response.json();
-    return result.records.length > 0;
-}

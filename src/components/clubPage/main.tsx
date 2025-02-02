@@ -7,7 +7,6 @@ import Link from "next/link";
 import { forbidden, notFound } from "next/navigation";
 import { LongDescription } from "./md";
 import { auth } from "@/auth";
-import { isOwner } from "@/libs/searchers/userClubData";
 import { headers } from 'next/headers';
 
 export default async function Club({ id }: { id: string }) {
@@ -16,11 +15,12 @@ export default async function Club({ id }: { id: string }) {
     const protocol = headersData.get('x-forwarded-proto') ?? host?.startsWith('localhost') ? 'http' : 'https'
     const apiBase = `${protocol}://${host}`
     const session = await auth();
-    const isOwn = await isOwner(session?.user?.email ?? "", id);
+    const owners = (await (await fetch(`${apiBase}/api/clubs/${id}/owners`)).json()) as string[];
+    const isOwn = owners.some(owner => owner == session?.user?.email);
     const res = await fetch(`${apiBase}/api/clubs/${id}`);
     const club = await res.json() as ClubType;
     if (!club) notFound();
-    if (!isOwn && !(club.visible == 1)) forbidden();
+    if (!isOwn && !((club.visible & 0x1) == 0x1)) forbidden();
     return (
         <>
             <KeyVisual club={club} />

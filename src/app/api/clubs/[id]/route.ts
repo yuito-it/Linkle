@@ -1,13 +1,18 @@
+import Club from "@/models/Club";
+import User from "@/models/User";
+
 export const dynamic = 'force-dynamic';
 
 const endpoint = process.env.DB_API_ENDPOINT;
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    console.log(`${endpoint}/clubs/${id}`);
-    const apiRes = await fetch(`${endpoint}/clubs/${id}`);
-    const data = await apiRes.json();
-    return Response.json(data);
+    const clubRes = await fetch(`${endpoint}/clubs/${id}`);
+    const clubData = (await clubRes.json()) as Club;
+    const user_clubRes = await fetch(`${endpoint}/user_club/?filter1=club,eq,${id}`);
+    const user_clubData = ((await user_clubRes.json()) as { records: [{ user: string }] }).records.map((record) => record.user);
+    clubData.owner = user_clubData;
+    return Response.json(clubData);
 }
 
 export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
