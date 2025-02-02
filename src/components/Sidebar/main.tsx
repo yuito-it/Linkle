@@ -200,7 +200,7 @@ export default function SidebarMain({ children, email }: Readonly<{ children: Re
                     </SessionProvider>
                 </List>
             </Drawer>
-            <Main open={open} sx={{ p: 0 }}>
+            <Main open={open} sx={{ p: 0, width: "100%" }}>
                 <DrawerHeader />
                 {children}
             </Main>
