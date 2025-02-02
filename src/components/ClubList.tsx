@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import searchClubs from "@/libs/searchers/clubs";
 import ClubCard from "./ClubCard";
 import Club from "@/models/Club";
 
