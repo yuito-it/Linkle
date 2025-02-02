@@ -35,7 +35,7 @@ export default function MenuList() {
             icon: <DashboardIcon/>,
         },*/
         {
-            label: 'ログアウト',
+            label: 'サインアウト',
             href: '/signout',
             icon: <LogoutIcon />,
         },
@@ -43,7 +43,12 @@ export default function MenuList() {
 
     const noLoginedMenuList = [
         {
-            label: 'ログイン',
+            label: 'クラブ一覧',
+            href: '/clubs',
+            icon: <GroupsIcon />,
+        },
+        {
+            label: 'サインイン',
             href: '/signin',
             icon: <LoginIcon />,
         },
