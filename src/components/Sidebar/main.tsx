@@ -73,8 +73,7 @@ const AppBar = styled(MuiAppBar, {
         width: '100%',
         marginLeft: 0,
     },
-    boxShadow: 'none',
-    backgroundColor: 'white',
+    boxShadow: '1px 1px 5px 0px rgba(0,0,0,0.2)',
 }));
 
 const DrawerHeader = styled('div')(({ theme }) => ({
