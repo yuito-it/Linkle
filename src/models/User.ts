@@ -7,6 +7,7 @@ type User = {
   created_at: Date;
   updated_at: Date;
   clubs: Club[];
+  image: string | undefined;
 };
 
 export default User;
