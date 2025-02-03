@@ -15,6 +15,7 @@ export async function POST(req: NextRequest) {
   const payload = {
     email: session.user?.email,
     slack_name: body.slackName,
+    image: body.image
   };
   const apiRes = await fetch(`${endpoint}/users`, {
     method: "POST",
@@ -41,6 +42,7 @@ export async function PUT(req: NextRequest) {
   const user = data.records[0];
   const payload = {
     slack_name: body.name,
+    image: body.image
   };
   const apiRes = await fetch(`${endpoint}/users/${user.id}`, {
     method: "PUT",
