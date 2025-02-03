@@ -45,6 +45,7 @@ export default function Settings({ name }: { name: string }) {
               const pairoad = {
                 name: data.get("name") as string,
                 email: session?.user?.email,
+                image: session?.user?.image,
               };
               const res = await fetch("/api/user", {
                 method: "PUT",
