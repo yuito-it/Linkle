@@ -6,12 +6,12 @@ import remarkMath from "remark-math";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "利用規約 - Linkle",
-    description: "Linkleの利用規約です。",
-}
+  title: "利用規約 - Linkle",
+  description: "Linkleの利用規約です。",
+};
 
 export default async function TOS() {
-    const description = `
+  const description = `
 # Linkle利用規約
 この利用規約（以下、「本規約」といいます。）は、デジタル創作サークルUniProject N/S Branch（以下、「当団体」といいます。）がこのウェブサイト上で提供するサービス（以下、「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下、「ユーザー」といいます。）には、本規約に従って、本サービスをご利用いただきます。
 
@@ -28,7 +28,7 @@ export default async function TOS() {
 - その他、当団体が利用登録を相当でないと判断した場合
 ## 第3条（ユーザーIDおよびパスワードの管理）
 1. ユーザーは、自己の責任において、本サービスのユーザーIDおよびパスワードを適切に管理するものとします。
-2. ユーザーは、いかなる場合にも、ユーザーIDおよびパスワードを第三者に譲渡または貸与し、もしくは第三者と共用することはできません。当団体は、ユーザーIDとパスワードの組み合わせが登録情報と一致してログインされた場合には、そのユーザーIDを登録しているユーザー自身による利用とみなします。
+2. ユーザーは、いかなる場合にも、ユーザーIDおよびパスワードを第三者に譲渡または貸与し、もしくは第三者と共用することはできません。当団体は、ユーザーIDとパスワードの組み合わせが登録情報と一致してサインインされた場合には、そのユーザーIDを登録しているユーザー自身による利用とみなします。
 3. ユーザーID及びパスワードが第三者によって使用されたことによって生じた損害は、当団体に故意又は重大な過失がある場合を除き、当団体は一切の責任を負わないものとします。
 ## 第4条（利用料金および支払方法）
 1. ユーザーは、本サービスの有料部分の対価として、当団体が別途定め、本ウェブサイトに表示する利用料金を、当団体が指定する方法により支払うものとします。
@@ -111,10 +111,23 @@ export default async function TOS() {
 2. 本サービスに関して紛争が生じた場合には、津地方裁判所を専属的合意管轄とします。
 
 以上
-`
-    return (
-        <Stack flex={1} flexDirection={"column"} justifyContent={"center"} alignItems={"center"} justifyItems={"center"} p={2}>
-            <ReactMarkdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex]} className={"markdown"}>{description}</ReactMarkdown>
-        </Stack>
-    );
+`;
+  return (
+    <Stack
+      flex={1}
+      flexDirection={"column"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      justifyItems={"center"}
+      p={2}
+    >
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeKatex]}
+        className={"markdown"}
+      >
+        {description}
+      </ReactMarkdown>
+    </Stack>
+  );
 }

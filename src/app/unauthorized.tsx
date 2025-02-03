@@ -15,10 +15,10 @@ export default async function forbidden() {
       minHeight={"100vh"}
       textAlign="center"
     >
-      <Typography variant="h1">404</Typography>
-      <Typography variant="h5">Not Found</Typography>
-      <Typography>The page you are looking for does not exist.</Typography>
-      <Link href="/">Go back to the HOME</Link>
+      <Typography variant="h1">401</Typography>
+      <Typography variant="h5">Unauthorized</Typography>
+      <Typography>You&#39;re not authorized to access this page.</Typography>
+      <Link href="/signin">Signin</Link>
     </Stack>
   );
 }
