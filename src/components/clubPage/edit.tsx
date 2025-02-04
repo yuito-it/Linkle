@@ -149,7 +149,6 @@ export default function ClubEdit({ id }: { id: string }) {
                     ? new URL(data.get("image") as string)
                     : undefined;*/
                   const file = data.get("file") as File;
-                  let imgURL = undefined;
                   if (file) {
                     const fileData = new FormData();
                     fileData.append("clubId", id);
@@ -163,9 +162,8 @@ export default function ClubEdit({ id }: { id: string }) {
                       alert("画像のアップロードに失敗しました。");
                       return;
                     }
-                    imgURL = new URL((await filePostApiRes.json()).url);
                   }
-                  let URLres = file.name;
+                  const URLres = file.name;
                   /*if (imgURL?.host == "drive.google.com" && imgURL?.pathname.startsWith("/uc")) {
                     URLres = imgURL.toString();
                   } else if (imgURL?.host == "drive.google.com") {

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import "katex/dist/katex.min.css";
 import Link from "next/link";
-import { forbidden, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { LongDescription } from "./md";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
