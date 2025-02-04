@@ -17,36 +17,49 @@ export default function Club({ id }: { id: string }) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const { data: session } = useSession();
   useEffect(() => {
-    const fetchClub = async () => {
-      const res = await fetch(`/api/clubs/${id}`);
-      console.log(res.status);
-      if (res.status == 403) window.location.href = "/forbidden";
-      const club = (await res.json()) as ClubType;
-      if (!club) redirect("/not-found");
-      setClub(club);
+    try {
+      const fetchClub = async () => {
+        const res = await fetch(`/api/clubs/${id}`);
+        console.log(res.status);
+        if (res.status == 403) window.location.href = "/forbidden";
+        const club = (await res.json()) as ClubType;
+        if (!club) redirect("/not-found");
+        setClub(club);
+      }
+      fetchClub();
     }
-    fetchClub();
+    catch (e) {
+      setError(e as string);
+      setLoading(false);
+    }
   }, [session]);
   useEffect(() => {
-    if (club?.image) {
-      const imgURL = club.image ? (club.image.startsWith("https://") ? new URL(club.image) : club.image) : undefined;
-      if (imgURL) {
-        if (imgURL instanceof URL) setImageUrl(imgURL.toString());
-        else {
-          const fetchURL = async () => {
-            const res = await fetch(`/api/images?filename=${club.image}&clubId=${id}`);
-            if (res.ok) {
-              const url = new URL((await res.json()).url);
-              const temp1 = url?.pathname.split("/")[3];
-              const temp2 = temp1?.split("?")[0];
-              setImageUrl(`https://drive.google.com/uc?export=view&id=${temp2}`);
-            }
-          };
-          fetchURL();
+    try {
+      if (club?.image) {
+        const imgURL = club.image ? (club.image.startsWith("https://") ? new URL(club.image) : club.image) : undefined;
+        if (imgURL) {
+          if (imgURL instanceof URL) setImageUrl(imgURL.toString());
+          else {
+            const fetchURL = async () => {
+              const res = await fetch(`/api/images?filename=${club.image}&clubId=${id}`);
+              if (res.ok) {
+                const url = new URL((await res.json()).url);
+                const temp1 = url?.pathname.split("/")[3];
+                const temp2 = temp1?.split("?")[0];
+                setImageUrl(`https://drive.google.com/uc?export=view&id=${temp2}`);
+              }
+            };
+            fetchURL();
+          }
         }
       }
     }
-    setLoading(false);
+    catch (e) {
+      setError(e as string);
+    }
+    finally {
+      setLoading(false);
+    }
   }, [club]);
   return (
     <>
