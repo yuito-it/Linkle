@@ -53,6 +53,7 @@ export async function POST(request: NextRequest) {
         await uploadFile(filePath);
     } catch (error) {
         //fs.unlinkSync(filePath);
+        console.log(error);
         return NextResponse.json({ message: "File uploaded but an error occurred during upload" }, { status: 500 });
     }
     fs.unlinkSync(filePath);
