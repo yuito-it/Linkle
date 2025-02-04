@@ -54,25 +54,32 @@ export default function ClubEdit({ id }: { id: string }) {
   }, [id]);
 
   useEffect(() => {
-    if (searchResult?.image) {
-      const imgURL = searchResult.image ? (searchResult.image.startsWith("https://") ? new URL(searchResult.image) : searchResult.image) : undefined;
-      if (imgURL) {
-        if (imgURL instanceof URL) setImageUrl(imgURL.toString());
-        else {
-          const fetchURL = async () => {
-            const res = await fetch(`/api/images?filename=${searchResult.image}&clubId=${id}`);
-            if (res.ok) {
-              const url = new URL((await res.json()).url);
-              const temp1 = url?.pathname.split("/")[3];
-              const temp2 = temp1?.split("?")[0];
-              setImageUrl(`https://drive.google.com/uc?export=view&id=${temp2}`);
-            }
-          };
-          fetchURL();
+    try {
+      if (searchResult?.image) {
+        const imgURL = searchResult.image ? (searchResult.image.startsWith("https://") ? new URL(searchResult.image) : searchResult.image) : undefined;
+        if (imgURL) {
+          if (imgURL instanceof URL) setImageUrl(imgURL.toString());
+          else {
+            const fetchURL = async () => {
+              const res = await fetch(`/api/images?filename=${searchResult.image}&clubId=${id}`);
+              if (res.ok) {
+                const url = new URL((await res.json()).url);
+                const temp1 = url?.pathname.split("/")[3];
+                const temp2 = temp1?.split("?")[0];
+                setImageUrl(`https://drive.google.com/uc?export=view&id=${temp2}`);
+              }
+            };
+            fetchURL();
+          }
         }
       }
     }
-    setLoading(false);
+    catch (e) {
+      setSearchError(e as string);
+    }
+    finally {
+      setLoading(false);
+    }
   }, [searchResult]);
 
   interface ClubEditFormData {
