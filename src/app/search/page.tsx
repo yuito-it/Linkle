@@ -59,7 +59,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ q
           width={{ xs: "100%", lg: 2 / 5 }}
           sx={{ p: 5 }}
         >
-          <ClubSearchForm />
+          <ClubSearchForm query={query} />
         </Box>
         <Suspense fallback={<CircularProgress />}>
           <SearchResultsPage
