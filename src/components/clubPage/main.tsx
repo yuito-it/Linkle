@@ -1,13 +1,14 @@
 import ClubType from "@/models/Club";
 import { Alert, Avatar, Box, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-
 import "katex/dist/katex.min.css";
 import Link from "next/link";
 import { LongDescription } from "./md";
 import { use } from "react";
 import { getClubById } from "@/lib/server/club";
 import { forbidden, notFound, unauthorized } from "next/navigation";
+import { headers } from "next/headers";
+import { getPlaiceholder } from "plaiceholder";
 
 export default function Club({
   id,
@@ -79,7 +80,22 @@ export default function Club({
   );
 }
 
-function KeyVisual({ club, imageUrl }: { club: ClubType; imageUrl: string | undefined | null }) {
+async function KeyVisual({
+  club,
+  imageUrl,
+}: {
+  club: ClubType;
+  imageUrl: string | undefined | null;
+}) {
+  const headersData = await headers();
+  const host = headersData.get("host");
+  const protocol =
+    headersData.get("x-forwarded-proto") ?? host?.startsWith("localhost") ? "http" : "https";
+  const apiBase = `${protocol}://${host}`;
+  const response = await fetch(imageUrl ? new URL(imageUrl) : `${apiBase}/img/noClubImage.jpg`);
+  const arrayBuffer = await response.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
+  const { base64 } = await getPlaiceholder(buffer);
   return (
     <Box
       position={"relative"}
@@ -94,6 +110,9 @@ function KeyVisual({ club, imageUrl }: { club: ClubType; imageUrl: string | unde
         width={"5000"}
         height={0}
         style={{ width: "100%", height: "auto", objectFit: "contain" }}
+        priority
+        placeholder="blur"
+        blurDataURL={base64}
       />
       <Stack
         spacing={1}
