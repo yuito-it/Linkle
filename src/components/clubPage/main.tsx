@@ -151,21 +151,6 @@ export const availableContents = (
   if ((availableOn & 0x1) == 0x1 && (availableOn & 0x2) == 0x2) {
     return (
       <>
-        <Link href={`https://n-jr.slack.com/archives/${slack_link}`}>
-          <Avatar
-            sx={{
-              height: 35,
-              width: 35,
-              borderRadius: "50%",
-              border: "2px solid white",
-              boxShadow: 2,
-              backgroundColor: "#0ae",
-            }}
-            alt="中等部"
-          >
-            中
-          </Avatar>
-        </Link>
         <Link href={`https://n-highschool.slack.com/archives/${slack_link}`}>
           <Avatar
             sx={{
@@ -182,6 +167,21 @@ export const availableContents = (
             alt="高等部"
           >
             高
+          </Avatar>
+        </Link>
+        <Link href={`https://n-jr.slack.com/archives/${slack_link}`}>
+          <Avatar
+            sx={{
+              height: 35,
+              width: 35,
+              borderRadius: "50%",
+              border: "2px solid white",
+              boxShadow: 2,
+              backgroundColor: "#0ae",
+            }}
+            alt="中等部"
+          >
+            中
           </Avatar>
         </Link>
       </>
