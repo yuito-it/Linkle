@@ -11,8 +11,10 @@ export const getClubById = async (
 ): Promise<Club | fetchErrorResponse> => {
   try {
     const email = (await auth())?.user?.email;
-    if (!email) return "unauthorized";
-    const apiKey = CryptoJS.AES.encrypt(email, process.env.API_ROUTE_SECRET as string).toString();
+    const apiKey = CryptoJS.AES.encrypt(
+      email ?? "No Auth",
+      process.env.API_ROUTE_SECRET as string
+    ).toString();
     const res = await fetch(`${apiBase}/api/clubs/${id}`, {
       headers: new Headers({
         Cookie: sessionID ?? "",
@@ -21,7 +23,8 @@ export const getClubById = async (
     });
     if (res.status == 403) return "forbidden";
     const club = (await res.json()) as Club;
-    if (!club) return "notfound";
+    if (res.status == 401) return "unauthorized";
+    if (!club || res.status == 404) return "notfound";
     return club;
   } catch (e) {
     throw new Error(e as string);
